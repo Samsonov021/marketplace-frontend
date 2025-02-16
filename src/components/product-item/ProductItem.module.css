@@ -1,0 +1,23 @@
+.productImage {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+  
+  .productPrice {
+    font-size: 1em;
+    color: #e74c3c;
+    margin: 8px 0;
+  }
+  
+  .productName {
+    font-size: 1em;
+    margin: 8px 0;
+    color: #333;
+  }
+  
+  .productRating {
+    font-size: 0.9em;
+    color: #2ecc71;
+  }
