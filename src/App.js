@@ -1,18 +1,16 @@
 import './App.css';
-import ProductList from './components/product-list/ProductList';
-// import Footer from './components/ui/footer/Footer';
 import Navbar from './components/ui/navbar/NavBar';
-import MainPage from './pages/MainPage';
+import { BrowserRouter} from 'react-router-dom';
+import AppRouter from './router/AppRouter';
 
 function App() {
-  
-  
-  
+
   return (
     <div className="App">
-      <Navbar/>
-      <MainPage/>
-      {/* <Footer/> */}
+      <BrowserRouter>
+        <Navbar/>
+        <AppRouter/>
+      </BrowserRouter>
     </div>
   );
 }

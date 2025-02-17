@@ -21,3 +21,18 @@
     font-size: 0.9em;
     color: #2ecc71;
   }
+
+  .productContainer {
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    width: 200px;
+    text-align: center;
+    transition: transform 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .productContainer:hover {
+    transform: translateY(-10px); 
+  }
