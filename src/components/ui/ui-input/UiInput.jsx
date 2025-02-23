@@ -1,10 +1,13 @@
 import cl from './UiInput.module.css';
-const UiInput = ({placeholder}) => {
+const UiInput = ({ name, value, onChange, placeholder, type = 'text' }) => {
     return(
         <input 
         className={cl.UiInput}
-        type='text'
-        placeholder= {placeholder}
+        name={name}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        type={type}
         />
 
     );

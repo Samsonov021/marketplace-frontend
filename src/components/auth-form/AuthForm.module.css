@@ -1,0 +1,33 @@
+.authForm {
+    width: 400px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.authForm h1 {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.inputContainer input {
+    margin-bottom: 30px;
+    padding: 15px;
+    font-size: 16px;
+}
+
+.authForm button {
+    margin-top: 10px;
+    padding: 15px;
+    font-size: 16px;
+}
+
+.rememberMe {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.rememberMe input {
+    margin-right: 10px;
+}
+

@@ -10,6 +10,7 @@ const MainPage = () => {
   useEffect(() => {
     const getAll = async () => {
       const response = await getAllProducts();
+      console.log(response)
       setProducts(response);
     }  
     getAll();
