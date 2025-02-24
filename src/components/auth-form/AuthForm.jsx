@@ -15,7 +15,6 @@ const AuthForm = ({ authTypeTabs, setAuthTypeTabs, setModalActive }) => {
     useEffect(() => {
         return () => {
             setAuthTypeTabs(authTypes.LOGIN);
-            
             dispatch(refreshError());
         }
     }, [])
@@ -112,17 +111,17 @@ const AuthForm = ({ authTypeTabs, setAuthTypeTabs, setModalActive }) => {
                 <h1>Регистрация</h1>
                 <div className={cl.inputContainer}>
                     <UiInput 
+                        placeholder="Номер телефона"
+                        name='phone'
+                        value={formValues.phone}
+                        onChange={inputChangeHandler} 
+                    />
+                    <UiInput 
                         placeholder="Имя" 
                         type="text"
                         name='name'
                         value={formValues.name}
                         onChange={inputChangeHandler}
-                    />
-                    <UiInput 
-                        placeholder="Номер телефона"
-                        name='phone'
-                        value={formValues.phone}
-                        onChange={inputChangeHandler} 
                     />
                     <UiInput 
                         placeholder="Электронная почта" 
