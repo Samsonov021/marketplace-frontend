@@ -7,7 +7,7 @@ export const login = (credentials) => async (dispatch) => {
   try {
     const response = await userLogin(credentials);
     console.log(response)
-    localStorage.setItem('authToken', response.access_token);
+    localStorage.setItem('access_token', response.access_token);
     dispatch({ type: 'LOGIN_SUCCESS', payload: response});
   } catch (error) {
     dispatch({ type: 'LOGIN_FAILURE', payload: error.response.data.message });
@@ -16,7 +16,7 @@ export const login = (credentials) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   dispatch({ type: 'LOGOUT' });
-  localStorage.removeItem('authToken');
+  localStorage.removeItem('access_token');
 };
 
 export const registration = (credentials) => async (dispatch) => {
@@ -32,19 +32,18 @@ export const registration = (credentials) => async (dispatch) => {
 };
 
 export const checkAuth = () => async (dispatch) => {
-  const token = localStorage.getItem('access_token');
+  const accessToken = localStorage.getItem('access_token');
 
-  if (!token) {
+  if (!accessToken) {
       dispatch({ type: 'LOGOUT' });
       return;
   }
 
   try {
-      const response = await axios.post(
+      const response = await axios.get(
           'http://localhost:3000/auth/me',
-          {}, 
           {
-              headers: { Authorization: `Bearer ${token}` }
+              headers: { Authorization: `Bearer ${accessToken}` }
           }
       );
 

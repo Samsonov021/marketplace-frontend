@@ -5,12 +5,16 @@ import cl from './NavBar.module.css';
 import UiModal from "../modal/UiModal";
 import AuthForm from "../../auth-form/AuthForm";
 import { authTypes } from "../../../config/auth.config";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../store/authActions";
 
 
 const Navbar = () => {
     
     const [modalActive, setModalActive] = useState(false);
     const [authTypeTabs, setAuthTypeTabs] = useState(authTypes.LOGIN);
+    const { isAuthenticated, user } = useSelector(state => state.auth);
+    const dispatch = useDispatch();
     
     return (
         <div className={cl.navbar}>
@@ -33,11 +37,19 @@ const Navbar = () => {
                 placeholder='Поиск'
                 />
             </div>
-            <div className={cl.navbar__button}>
-                <UiButton onClick={() => setModalActive(true)}>
-                    Войти
-                </UiButton>
-                
+            <div className={cl.navbar__auth}>
+                {isAuthenticated ? (
+                    <div className={cl.userInfo}>
+                        <p className={cl.userName}>{user.name}</p>
+                        <UiButton onClick={() => dispatch(logout())}>
+                            Выйти
+                        </UiButton>
+                    </div>
+                ) : (
+                    <UiButton onClick={() => setModalActive(true)}>
+                        Войти
+                    </UiButton>
+                )}
             </div>
         </div>
     );

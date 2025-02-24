@@ -16,7 +16,6 @@ function App() {
  
   return (
     <div className="App">
-      {isAuthenticated ? <h1>Вы авторизованы</h1> : <h1>Вход не выполнен</h1>}
       <BrowserRouter>
         <Navbar/>
         <AppRouter/>
