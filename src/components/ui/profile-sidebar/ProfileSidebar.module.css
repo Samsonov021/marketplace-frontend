@@ -1,0 +1,26 @@
+.profile__list {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 20px;
+    max-width: max-content;
+    padding-right: 32px;
+    margin-right: 32px;
+    border-right: solid black;
+}
+
+.list__item {
+    font-size: 20px;
+    max-width: max-content;
+    text-decoration: none;
+    color: black;
+}
+
+.list__item:hover {
+   font-weight: bold;
+   cursor: pointer;
+}
+
+.active {
+    font-weight: bold; 
+}

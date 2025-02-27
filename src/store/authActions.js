@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { userLogin, userRegistration } from '../api/auth.api';
+import { userLogin, userRegistration } from '../api/users.api';
 
 
 export const login = (credentials) => async (dispatch) => {
@@ -41,7 +41,7 @@ export const checkAuth = () => async (dispatch) => {
 
   try {
       const response = await axios.get(
-          'http://localhost:3000/auth/me',
+          'http://localhost:3000/users/me',
           {
               headers: { Authorization: `Bearer ${accessToken}` }
           }
@@ -54,6 +54,27 @@ export const checkAuth = () => async (dispatch) => {
       dispatch({ type: 'LOGOUT' });
   }
 };
+
+export const editUserInfo = (userData) => async (dispatch) => {
+  const accessToken = localStorage.getItem('access_token');
+
+  try {
+      const response = await axios.patch(
+          'http://localhost:3000/users/me',
+          userData,
+          {
+              headers: { Authorization: `Bearer ${accessToken}` },
+          }
+      );
+
+      dispatch({ type: 'LOGIN_SUCCESS', payload: response.data });
+  } catch (error) {
+      console.error("Ошибка проверки токена", error);
+      localStorage.removeItem('access_token');
+      dispatch({ type: 'LOGOUT' });
+  }
+};
+
 
 export const refreshError = () => (dispatch) => {
     dispatch({ type: 'REFRESH_ERROR' });

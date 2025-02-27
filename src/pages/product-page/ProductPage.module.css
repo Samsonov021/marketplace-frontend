@@ -86,7 +86,7 @@
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 30px;
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
@@ -94,5 +94,21 @@
 }
 
 .buy__button:hover {
-    background-color: #0056b3;
+    opacity: 70%;;
+}
+
+.favorites__button{
+    margin-top: 20px;
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+}
+
+.favorites__button:hover {
+    opacity: 70%;
 }

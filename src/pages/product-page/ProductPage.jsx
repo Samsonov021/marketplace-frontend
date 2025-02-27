@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getOneProduct } from "../../api/product.api";
 import styles from './ProductPage.module.css';
+import { addFavorite } from "../../api/users.api";
+
 
 const ProductPage = () => {
     const [product, setProduct] = useState(null);
@@ -13,7 +15,11 @@ const ProductPage = () => {
             setProduct(response);
         }
         fetchProduct();
-    }, [id]); 
+    }, [id]);
+
+    const addToFavorite = async () => {
+         await addFavorite(id);
+    }
 
     
     if (!product) {
@@ -54,6 +60,12 @@ const ProductPage = () => {
             <div className={styles.price__container}>
                 <p className={styles.product__price}>{product.price} руб.</p>
                 <button className={styles.buy__button}>Добавить в корзину</button>
+                <button 
+                    className={styles.favorites__button}
+                    onClick={() => addToFavorite()}
+                >
+                    Добавить в избранное
+                </button>
             </div>
         </div>
     );

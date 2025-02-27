@@ -7,6 +7,7 @@ import AuthForm from "../../auth-form/AuthForm";
 import { authTypes } from "../../../config/auth.config";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../store/authActions";
+import { Link } from "react-router-dom";
 
 
 const Navbar = () => {
@@ -29,9 +30,9 @@ const Navbar = () => {
                     />
                 </UiModal>)
             }
-            <div className={cl.navbar__logo}>
+            <Link to={`/`} className={cl.navbar__logo}>
                 Логотип
-            </div>
+            </Link>
             <div className={cl.navbar__input}>
                 <UiInput
                 placeholder='Поиск'
@@ -40,7 +41,8 @@ const Navbar = () => {
             <div className={cl.navbar__auth}>
                 {isAuthenticated ? (
                     <div className={cl.userInfo}>
-                        <p className={cl.userName}>{user.name}</p>
+                        <Link to={`/users/${user.id}`} className={cl.userName}>{user.name}</Link>
+                        {/* <p className={cl.userName}>{user.name}</p> */}
                         <UiButton onClick={() => dispatch(logout())}>
                             Выйти
                         </UiButton>

@@ -10,8 +10,6 @@ const AuthForm = ({ authTypeTabs, setAuthTypeTabs, setModalActive }) => {
     const dispatch = useDispatch();
     const { user, loading, error, isAuthenticated, registrationSuccess} = useSelector((state) => state.auth);
     
-
-    
     useEffect(() => {
         return () => {
             setAuthTypeTabs(authTypes.LOGIN);
@@ -94,7 +92,6 @@ const AuthForm = ({ authTypeTabs, setAuthTypeTabs, setModalActive }) => {
                 </UiButton>
                 <UiButton
                     className={cl.createAccountButton}
-                    text='Создать аккаунт'
                     onClick={() => {
                         setAuthTypeTabs(authTypes.REGISTRATION)
                         dispatch(refreshError());
