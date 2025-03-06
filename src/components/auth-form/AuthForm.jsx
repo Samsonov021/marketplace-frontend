@@ -8,7 +8,7 @@ import { authTypes } from "../../config/auth.config";
 
 const AuthForm = ({ authTypeTabs, setAuthTypeTabs, setModalActive }) => {
     const dispatch = useDispatch();
-    const { user, loading, error, isAuthenticated, registrationSuccess} = useSelector((state) => state.auth);
+    const { error, isAuthenticated, registrationSuccess} = useSelector((state) => state.auth);
     
     useEffect(() => {
         return () => {
@@ -22,7 +22,6 @@ const AuthForm = ({ authTypeTabs, setAuthTypeTabs, setModalActive }) => {
             setModalActive(false);
         }
     }, [isAuthenticated, registrationSuccess]);
-
  
     const [formValues, setFormValues] = useState({
         phone: '',
@@ -39,7 +38,6 @@ const AuthForm = ({ authTypeTabs, setAuthTypeTabs, setModalActive }) => {
             [name]: value
         });
     };
-    
 
     const registrationHandler = async (e) => {
         e.preventDefault();

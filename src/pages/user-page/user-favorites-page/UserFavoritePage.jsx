@@ -1,21 +1,17 @@
-import {  useEffect, useState } from "react";
-import { getAllFavorites } from "../../../api/users.api";
+import { useEffect, useState } from "react";
 import ProductList from "../../../components/product-list/ProductList";
 import ProfileLayout from "../../../layouts/profile-layout/ProfileLayout";
+import { useSelector } from "react-redux";
 
 
 const UserFavoritePage = () => {
 
   const [products, setProducts] = useState([]);
-
-  const getFavorites = async () => {
-    const response = await getAllFavorites();
-    setProducts(response);
-  };
+  const { favorites } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    getFavorites();
-  }, [products]);
+    setProducts(favorites);
+  }, [favorites]);
 
   return(
     <ProfileLayout>

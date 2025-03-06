@@ -44,3 +44,51 @@ export const deleteFavorite = async (productId) => {
     );
     return response.data;
 }
+
+export const addToCart = async (productId) => {
+    const accessToken = localStorage.getItem('access_token');
+    const response = await axios.post(
+        `http://localhost:3000/users/cart/add/${productId}`,
+        {},
+        {
+            headers: { Authorization: `Bearer ${accessToken}` },
+        }
+    );
+    return response.data;
+}
+
+export const deleteFromCart = async (productId) => {
+    const accessToken = localStorage.getItem('access_token');
+    const response = await axios.delete(
+        `http://localhost:3000/users/cart/remove/${productId}`,
+        
+        {
+            headers: { Authorization: `Bearer ${accessToken}` },
+        }
+    );
+    return response.data;
+}
+
+export const increaseQuantityInCart = async (productId) => {
+    const accessToken = localStorage.getItem('access_token');
+    const response = await axios.patch(
+        `http://localhost:3000/users/cart/increase/${productId}`,
+        {},
+        {
+            headers: { Authorization: `Bearer ${accessToken}` },
+        }
+    );
+    return response.data;
+}
+
+export const decreaseQuantityInCart = async (productId) => {
+    const accessToken = localStorage.getItem('access_token');
+    const response = await axios.patch(
+        `http://localhost:3000/users/cart/decrease/${productId}`,
+        {},
+        {
+            headers: { Authorization: `Bearer ${accessToken}` },
+        }
+    );
+    return response.data;
+}

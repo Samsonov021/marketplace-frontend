@@ -1,81 +1,177 @@
-import axios from 'axios';
-import { userLogin, userRegistration } from '../api/users.api';
-
+import axios from "axios";
+import {
+  addFavorite,
+  addToCart,
+  decreaseQuantityInCart,
+  deleteFavorite,
+  deleteFromCart,
+  increaseQuantityInCart,
+  userLogin,
+  userRegistration,
+} from "../api/users.api";
 
 export const login = (credentials) => async (dispatch) => {
-  dispatch({ type: 'LOGIN_REQUEST' });
+  dispatch({ type: "LOGIN_REQUEST" });
+
   try {
     const response = await userLogin(credentials);
-    console.log(response)
-    localStorage.setItem('access_token', response.access_token);
-    dispatch({ type: 'LOGIN_SUCCESS', payload: response});
+    localStorage.setItem("access_token", response.access_token);
+    dispatch({ type: "LOGIN_SUCCESS", payload: response });
+    dispatch(loadFavorites());
+    dispatch(loadCart());
   } catch (error) {
-    dispatch({ type: 'LOGIN_FAILURE', payload: error.response.data.message });
-  } 
+    dispatch({ type: "LOGIN_FAILURE", payload: error.response.data.message });
+  }
 };
 
 export const logout = () => (dispatch) => {
-  dispatch({ type: 'LOGOUT' });
-  localStorage.removeItem('access_token');
+  dispatch({ type: "LOGOUT" });
+  localStorage.removeItem("access_token");
 };
 
 export const registration = (credentials) => async (dispatch) => {
-  dispatch({ type: 'REGISTER_REQUEST' });
+  dispatch({ type: "REGISTER_REQUEST" });
+
   try {
-      const response = await userRegistration(credentials);
-      console.log("Ответ сервера (успех):", response);
-      dispatch({ type: 'REGISTER_SUCCESS' });
+    const response = await userRegistration(credentials);
+    dispatch({ type: "REGISTER_SUCCESS" });
   } catch (error) {
-      console.log("Ошибка регистрации:", error.response?.data || error.message);
-      dispatch({ type: 'REGISTER_FAILURE', payload: error.response?.data?.message || "Ошибка регистрации" });
+    dispatch({
+      type: "REGISTER_FAILURE",
+      payload: error.response?.data?.message || "Ошибка регистрации",
+    });
   }
 };
 
 export const checkAuth = () => async (dispatch) => {
-  const accessToken = localStorage.getItem('access_token');
+  const accessToken = localStorage.getItem("access_token");
 
   if (!accessToken) {
-      dispatch({ type: 'LOGOUT' });
-      return;
+    dispatch({ type: "LOGOUT" });
+    return;
   }
 
   try {
-      const response = await axios.get(
-          'http://localhost:3000/users/me',
-          {
-              headers: { Authorization: `Bearer ${accessToken}` }
-          }
-      );
+    const response = await axios.get("http://localhost:3000/users/me", {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
 
-      dispatch({ type: 'LOGIN_SUCCESS', payload: response.data });
+    dispatch({ type: "LOGIN_SUCCESS", payload: response.data });
   } catch (error) {
-      console.error("Ошибка проверки токена", error);
-      localStorage.removeItem('access_token');
-      dispatch({ type: 'LOGOUT' });
+    localStorage.removeItem("access_token");
+    dispatch({ type: "LOGOUT" });
   }
 };
 
 export const editUserInfo = (userData) => async (dispatch) => {
-  const accessToken = localStorage.getItem('access_token');
+  const accessToken = localStorage.getItem("access_token");
 
   try {
-      const response = await axios.patch(
-          'http://localhost:3000/users/me',
-          userData,
-          {
-              headers: { Authorization: `Bearer ${accessToken}` },
-          }
-      );
+    const response = await axios.patch(
+      "http://localhost:3000/users/me",
+      userData,
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
 
-      dispatch({ type: 'LOGIN_SUCCESS', payload: response.data });
+    dispatch({ type: "LOGIN_SUCCESS", payload: response.data });
   } catch (error) {
-      console.error("Ошибка проверки токена", error);
-      localStorage.removeItem('access_token');
-      dispatch({ type: 'LOGOUT' });
+    console.error("Ошибка проверки токена", error);
+    localStorage.removeItem("access_token");
+    dispatch({ type: "LOGOUT" });
   }
 };
 
-
 export const refreshError = () => (dispatch) => {
-    dispatch({ type: 'REFRESH_ERROR' });
-  };
+  dispatch({ type: "REFRESH_ERROR" });
+};
+
+export const loadFavorites = () => async (dispatch) => {
+  const accessToken = localStorage.getItem("access_token");
+
+  try {
+    const response = await axios.get("http://localhost:3000/users/favorites", {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+
+    dispatch({ type: "LOAD_FAVORITES", payload: response.data });
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: "LOAD_FAVORITES", payload: [] });
+  }
+};
+
+export const addFavorites = (product) => async (dispatch) => {
+  try {
+    await addFavorite(product.id);
+    dispatch({ type: "ADD_FAVORITES", payload: product });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteFavorites = (productId) => async (dispatch) => {
+  try {
+    await deleteFavorite(productId);
+    dispatch({ type: "DELETE_FAVORITES", payload: productId });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const loadCart = () => async (dispatch) => {
+  const accessToken = localStorage.getItem("access_token");
+
+  try {
+    const response = await axios.get("http://localhost:3000/users/cart", {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+
+    dispatch({ type: "LOAD_CART", payload: response.data });
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: "LOAD_CART", payload: { items: [] } });
+  }
+};
+
+export const addCart = (product) => async (dispatch) => {
+  try {
+    await addToCart(product.id);
+    const cartItem = {
+      productId: product.id,
+      quantity: 1,
+      product: product,
+    };
+    dispatch({ type: "ADD_CART", payload: cartItem });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deleteCart = (productId) => async (dispatch) => {
+  try {
+    await deleteFromCart(productId);
+    dispatch({ type: "DELETE_CART", payload: productId });
+  } catch (error) {
+    console.error( error);
+  }
+}
+
+export const increaseCart = (productId) => async (dispatch) => {
+  try {
+    await increaseQuantityInCart(productId);
+    dispatch({ type: "INCREASE_CART", payload: productId });
+  } catch (error) {
+    console.error( error);
+  }
+}
+
+export const decreaseCart = (productId) => async (dispatch) => {
+  try {
+    await decreaseQuantityInCart(productId);
+    dispatch({ type: "DECREASE_CART", payload: productId });
+  } catch (error) {
+    console.error( error);
+  }
+}
