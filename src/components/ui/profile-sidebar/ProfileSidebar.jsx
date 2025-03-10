@@ -14,7 +14,7 @@ const ProfileSidebar = () => {
             <h2 style={{marginBottom: '10px'}}>Личный кабинет</h2>
             <Link to={`/users/${user?.id}`} className={getActive(`/users/${user?.id}`)}>Профиль</Link>
             <Link to={'/users/favorites'} className={getActive('/users/favorites')}>Избранное</Link>
-            <Link className={getActive('/users/cart')}>Моя корзина</Link>
+            <Link to={'/users/cart'} className={getActive('/users/cart')}>Моя корзина</Link>
             <Link className={getActive('/users/orders')}>Мои заказы</Link>
         </div>
     );

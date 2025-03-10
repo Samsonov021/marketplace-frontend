@@ -92,3 +92,14 @@ export const decreaseQuantityInCart = async (productId) => {
     );
     return response.data;
 }
+
+export const loadFromCart = async () => {
+    const accessToken = localStorage.getItem('access_token');
+    const response = await axios.get(
+        "http://localhost:3000/users/cart/",
+        {
+            headers: { Authorization: `Bearer ${accessToken}` },
+        }
+    );
+    return response.data;
+}

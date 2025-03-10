@@ -6,6 +6,7 @@ import {
   deleteFavorite,
   deleteFromCart,
   increaseQuantityInCart,
+  loadFromCart,
   userLogin,
   userRegistration,
 } from "../api/users.api";
@@ -121,14 +122,11 @@ export const deleteFavorites = (productId) => async (dispatch) => {
 };
 
 export const loadCart = () => async (dispatch) => {
-  const accessToken = localStorage.getItem("access_token");
-
   try {
-    const response = await axios.get("http://localhost:3000/users/cart", {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
+    const response = await loadFromCart();
+    console.log(response)
+    dispatch({ type: "LOAD_CART", payload: response });
 
-    dispatch({ type: "LOAD_CART", payload: response.data });
   } catch (error) {
     console.log(error);
     dispatch({ type: "LOAD_CART", payload: { items: [] } });
