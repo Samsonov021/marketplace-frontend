@@ -96,7 +96,41 @@ export const decreaseQuantityInCart = async (productId) => {
 export const loadFromCart = async () => {
     const accessToken = localStorage.getItem('access_token');
     const response = await axios.get(
-        "http://localhost:3000/users/cart/",
+        "http://localhost:3000/users/cart",
+        {
+            headers: { Authorization: `Bearer ${accessToken}` },
+        }
+    );
+    return response.data;
+}
+
+export const createOrder = async (orderData) => {
+    const accessToken = localStorage.getItem('access_token');
+    const response = await axios.post(
+        "http://localhost:3000/users/orders/create",
+        orderData,
+        {
+            headers: { Authorization: `Bearer ${accessToken}` },
+        }
+    );
+    return response.data;
+}
+
+export const loadAllOrders = async () => {
+    const accessToken = localStorage.getItem('access_token');
+    const response = await axios.get(
+        "http://localhost:3000/users/orders",
+        {
+            headers: { Authorization: `Bearer ${accessToken}` },
+        }
+    );
+    return response.data;
+}
+
+export const orderCancellation = async (orderId) => {
+    const accessToken = localStorage.getItem('access_token');
+    const response = await axios.delete(
+        `http://localhost:3000/users/orders/${orderId}/cancel`,
         {
             headers: { Authorization: `Bearer ${accessToken}` },
         }

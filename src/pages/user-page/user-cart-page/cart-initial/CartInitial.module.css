@@ -1,0 +1,54 @@
+.cartContainer {
+    display: flex;
+    margin-left: 20px;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  .orderInfo {
+    width: 300px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .orderInfo h3 {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: #333;
+  }
+  
+  .orderInfo div {
+    margin-bottom: 10px;
+  }
+  
+  .orderInfo strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1em;
+  }
+  
+  .orderInfo p {
+    margin: 0;
+    font-size: 1em;
+    color: #555;
+  }
+  
+  .orderButton {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+  }
+  
+  .orderButton:hover {
+    background-color: #218838;
+  }
+  

@@ -1,0 +1,81 @@
+.editableField {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.viewWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.value {
+    font-size: 14px;
+    color: #555;
+}
+
+.editButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.editButton:hover {
+    background-color: #0056b3;
+}
+
+.editWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.input {
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.saveButton {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.saveButton:hover {
+    background-color: #218838;
+}
+
+.cancelButton {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.cancelButton:hover {
+    background-color: #c82333;
+}

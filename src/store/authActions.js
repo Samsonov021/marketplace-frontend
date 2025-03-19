@@ -6,6 +6,7 @@ import {
   deleteFavorite,
   deleteFromCart,
   increaseQuantityInCart,
+  loadAllOrders,
   loadFromCart,
   userLogin,
   userRegistration,
@@ -124,7 +125,6 @@ export const deleteFavorites = (productId) => async (dispatch) => {
 export const loadCart = () => async (dispatch) => {
   try {
     const response = await loadFromCart();
-    console.log(response)
     dispatch({ type: "LOAD_CART", payload: response });
 
   } catch (error) {
@@ -173,3 +173,46 @@ export const decreaseCart = (productId) => async (dispatch) => {
     console.error( error);
   }
 }
+
+export const createOrder = (orderData) => async (dispatch) => {
+  const accessToken = localStorage.getItem("access_token");
+
+  try {
+    const response = await axios.post(
+      "http://localhost:3000/users/orders/create",
+      orderData,
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
+
+    dispatch({ type: "CREATE_ORDER_SUCCESS", payload: response.data });
+    dispatch({ type: "CLEAR_CART" }); 
+  } catch (error) {
+    console.error("Ошибка создания заказа", error);
+    dispatch({
+      type: "CREATE_ORDER_FAILURE",
+      payload: error.response?.data?.message || "Ошибка при создании заказа",
+    });
+  }
+};
+
+export const loadOrders = () => async (dispatch) => {
+  const accessToken = localStorage.getItem("access_token");
+
+  try {
+      const response = await axios.get("http://localhost:3000/users/orders", {
+          headers: { Authorization: `Bearer ${accessToken}` },
+      });
+
+      dispatch({ type: "LOAD_ORDERS", payload: response.data });
+  } catch (error) {
+      console.error("Ошибка загрузки заказов", error);
+      dispatch({ type: "LOAD_ORDERS", payload: [] });
+  }
+};
+
+export const setSearchQuery = (query) => ({
+  type: 'SET_SEARCH_QUERY',
+  payload: query,
+});

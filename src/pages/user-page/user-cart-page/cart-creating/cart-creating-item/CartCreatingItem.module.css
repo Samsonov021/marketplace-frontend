@@ -1,0 +1,18 @@
+.product__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    gap: 4px;
+
+    border: 1px solid black;
+}
+
+.product__image {
+    max-width: 128px;
+    max-height: 128px;
+}
+
+.product__quantity {
+    text-align: center;
+}

@@ -3,6 +3,8 @@ const initialState = {
     isAuthenticated: false,
     favorites: [],
     cart: { items: [] },
+    orders : [],
+    searchQuery: '', // состояние для поиска
     registrationSuccess: false,
     loading: false,
     error: null,
@@ -45,58 +47,80 @@ function userReducer(state = initialState, action) {
         favorites: state.favorites.filter((item) => item.id !== action.payload),
       };
 
-      case 'LOAD_CART':
+    case 'LOAD_CART':
+      return {
+        ...state,
+        cart: {
+            items: action.payload.items || action.payload || [],
+        },
+    };
+    case 'ADD_CART':
       return {
           ...state,
           cart: {
-              items: action.payload.items || action.payload || [],
+              ...state.cart,
+              items: [...state.cart.items, { ...action.payload, quantity: 1 }],
           },
       };
-    case 'ADD_CART':
-        return {
-            ...state,
-            cart: {
-                ...state.cart,
-                items: [...state.cart.items, { ...action.payload, quantity: 1 }],
-            },
-        };
     case 'DELETE_CART':
-        return {
-            ...state,
-            cart: {
-                ...state.cart,
-                items: state.cart.items.filter((item) => item.productId !== action.payload),
-            },
-        };
-
-    case 'INCREASE_CART':
-        return {
+      return {
           ...state,
           cart: {
               ...state.cart,
-              items: state.cart.items.map((item) =>
-                  item.productId === action.payload
-                      ? { ...item, quantity: item.quantity + 1 }
-                      : item
-              ),
+              items: state.cart.items.filter((item) => item.productId !== action.payload),
           },
-        };
+      };
+
+    case 'INCREASE_CART':
+      return {
+        ...state,
+        cart: {
+            ...state.cart,
+            items: state.cart.items.map((item) =>
+                item.productId === action.payload
+                    ? { ...item, quantity: item.quantity + 1 }
+                    : item
+            ),
+        },
+      };
 
     case 'DECREASE_CART':
-        return {
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+            items: state.cart.items
+              .map((item) =>
+                item.productId === action.payload
+                    ? { ...item, quantity: item.quantity - 1 }
+                    : item
+              )
+              .filter((item) => item.quantity > 0), 
+        },
+      };
+    
+    case 'CLEAR_CART':
+      return { ...state, cart: { items: [] } };
+
+    case 'CREATE_ORDER_SUCCESS':
+      return {
+        ...state,
+        orders: [...state.orders, action.payload],
+        cart: { items: [] },
+      };
+    
+    case 'CREATE_ORDER_FAILURE':
+      return { ...state, error: action.payload };
+
+    case 'LOAD_ORDERS':
+      return { ...state, orders: action.payload || [] };
+    
+    case 'SET_SEARCH_QUERY':
+      return {
           ...state,
-          cart: {
-            ...state.cart,
-              items: state.cart.items
-                .map((item) =>
-                  item.productId === action.payload
-                      ? { ...item, quantity: item.quantity - 1 }
-                      : item
-                )
-                .filter((item) => item.quantity > 0), 
-          },
-        };
-      
+          searchQuery: action.payload,
+      };
+    
     default:
       return state;
   }

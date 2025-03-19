@@ -1,0 +1,117 @@
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.orderContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.orderCard {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 600px;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.orderHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.orderInfo {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.orderTotal {
+    font-weight: bold;
+}
+
+.orderStatus {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.orderStatus.pending {
+    background-color: #ffeb3b;
+    color: #856404;
+}
+
+.orderStatus.delivered {
+    background-color: #4caf50;
+    color: white;
+}
+
+.orderStatus.canceled {
+    background-color: #f44336;
+    color: white;
+}
+
+.orderItems {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column; 
+    gap: 10px;
+}
+
+.orderItem {
+    display: flex;
+    gap: 10px;
+}
+
+.orderItem img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.cancel__button {
+    margin-left: auto;
+    cursor: pointer;
+    font-weight: bold;
+    color: grey;
+}
+
+.cancel__button:hover {
+    opacity: 0.5;
+}
+
+.statusFilters {
+    display: flex;
+    gap: 10px;
+}
+.statusFilters button {
+    padding: 15px 25px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.statusFilters button.active {
+    background-color: lightblue;
+    border-color: lightblue;
+}
+
+.statusFilters button:hover {
+    opacity: 0.6;
+}

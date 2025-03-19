@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import ProfileLayout from "../../../layouts/profile-layout/ProfileLayout";
-import { useSelector } from "react-redux";
-import CartList from "../../../components/cart-list/CartList";
-import cl from './UserCartPage.module.css';
+import { useDispatch, useSelector } from "react-redux";
+import { CartInitial } from "./cart-initial/CartInitial";
+import { CartCreating } from "./cart-creating/CartCreating";
+import { updateCart } from "../../../store/authActions";
 
 const UserCartPage = () => {
   const [products, setProducts] = useState([]);
   const [discount, setDiscount] = useState(0);
-  const { cart } = useSelector((state) => state.auth);
+  const { cart, user } = useSelector((state) => state.auth);
+
+  const [cartTabs, setCartTabs] = useState(0);
 
   useEffect(() => {
     if (cart && cart.items) {
@@ -19,29 +21,16 @@ const UserCartPage = () => {
     return total + item.product.price * item.quantity;
   }, 0);
 
+
   return (
-    <ProfileLayout>
-      <div className={cl.cartContainer}>
-        <CartList 
-          products={products} 
-        />
-        <div className={cl.orderInfo}>
-          <h3>Информация о заказе</h3>
-          <div>
-            <strong>Ваша корзина</strong>
-            <p>{cart.items.length} товаров • {totalCost} руб.</p>
-            <p> скидка • {discount} руб.</p>
-          </div>
-          <div>
-            <strong>Общая стоимость</strong>
-            <p>{totalCost} руб.</p>
-          </div>
-          <button className={cl.orderButton}>
-            Перейти к оформлению
-          </button>
-        </div>
-      </div>
-    </ProfileLayout>
+   <>
+    {
+      cartTabs === 0 && <CartInitial products={products} cart={cart} discount={discount} totalCost={totalCost} setCartTabs={setCartTabs} />
+    }
+    {
+      cartTabs === 1 && <CartCreating products={products} cart={cart} totalCost={totalCost} user = {user} setCartTabs={setCartTabs}/>
+    }
+   </>
   );
 };
 

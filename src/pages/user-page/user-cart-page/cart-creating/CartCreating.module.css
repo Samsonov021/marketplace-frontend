@@ -1,0 +1,109 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.header__button {
+    font-size: 16px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.header__button:hover {
+    font-weight: bold;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 32px;
+    background-color: white;
+    padding: 16px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    flex: 1;
+}
+
+.delivery {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.delivery__title {
+    font-size: 32px;
+}
+
+.delivery__info {
+    font-size: 14px;
+    padding-bottom: 16px;
+}
+
+.delivery__wrapper {
+    max-width: 60%;
+}
+
+.products {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.products__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.orderInfo {
+    width: 400px;
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+.orderInfo h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.orderInfo div {
+    margin-bottom: 15px;
+}
+
+.orderInfo strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+.orderInfo p {
+    margin: 0;
+    font-size: 1.1em;
+    color: #555;
+}
+
+.orderButton {
+    width: 100%;
+    padding: 12px 24px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+

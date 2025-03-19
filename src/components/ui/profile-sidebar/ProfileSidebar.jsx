@@ -15,7 +15,7 @@ const ProfileSidebar = () => {
             <Link to={`/users/${user?.id}`} className={getActive(`/users/${user?.id}`)}>Профиль</Link>
             <Link to={'/users/favorites'} className={getActive('/users/favorites')}>Избранное</Link>
             <Link to={'/users/cart'} className={getActive('/users/cart')}>Моя корзина</Link>
-            <Link className={getActive('/users/orders')}>Мои заказы</Link>
+            <Link to={'/users/orders'} className={getActive('/users/orders')}>Мои заказы</Link>
         </div>
     );
 };
