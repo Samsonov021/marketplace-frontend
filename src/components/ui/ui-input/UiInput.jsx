@@ -1,5 +1,5 @@
 import cl from './UiInput.module.css';
-const UiInput = ({ name, value, onChange, placeholder, type = 'text', disabled = false }) => {
+const UiInput = ({ name, value, onChange, placeholder, onKeyDown, type = 'text', disabled = false }) => {
     return(
         <input 
         className={cl.UiInput}
@@ -9,6 +9,7 @@ const UiInput = ({ name, value, onChange, placeholder, type = 'text', disabled =
         placeholder={placeholder}
         type={type}
         disabled={disabled}
+        onKeyDown={onKeyDown}
         />
 
     );

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { CartInitial } from "./cart-initial/CartInitial";
 import { CartCreating } from "./cart-creating/CartCreating";
-import { updateCart } from "../../../store/authActions";
 
 const UserCartPage = () => {
   const [products, setProducts] = useState([]);

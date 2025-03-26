@@ -4,7 +4,6 @@ const initialState = {
     favorites: [],
     cart: { items: [] },
     orders : [],
-    searchQuery: '', // состояние для поиска
     registrationSuccess: false,
     loading: false,
     error: null,
@@ -114,12 +113,6 @@ function userReducer(state = initialState, action) {
 
     case 'LOAD_ORDERS':
       return { ...state, orders: action.payload || [] };
-    
-    case 'SET_SEARCH_QUERY':
-      return {
-          ...state,
-          searchQuery: action.payload,
-      };
     
     default:
       return state;

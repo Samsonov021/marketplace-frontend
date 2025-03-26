@@ -1,0 +1,60 @@
+.main {
+    background-color: white;
+    padding: 20px;
+}
+
+/* Заголовок результатов поиска */
+.searchResultsTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+/* Сообщение об отсутствии товаров */
+.noProductsMessage {
+    font-size: 18px;
+    color: #555;
+    margin-top: 20px;
+}
+
+/* Блок фильтров и сортировки */
+.filterSortContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Фильтры */
+.filters {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.priceFilter input {
+    width: 80px;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+.priceFilter input::-webkit-outer-spin-button,
+.priceFilter input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+
+.sort label {
+    margin-right: 5px;
+}
+
+.sort select {
+    padding: 5px;
+    border-radius: 5px;
+}

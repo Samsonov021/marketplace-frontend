@@ -6,6 +6,7 @@ import UserFavoritePage from "../pages/user-page/user-favorites-page/UserFavorit
 import UserCartPage from "../pages/user-page/user-cart-page/UserCartPage";
 import  OrderCreatePage  from "../pages/user-page/user-cart-page/order-create/OrderCreatePage";
 import UserOrdersPage from "../pages/user-page/user-orders-page/UserOrdersPage";
+import SearchPage from "../pages/search-page/SearchPage";
 
 export const routes = [
     { path: "/", component: <MainPage />, exact: true },
@@ -15,6 +16,7 @@ export const routes = [
     { path: "/users/cart", component: <UserCartPage />, exact: true },
     { path: "/users/orders", component: <UserOrdersPage />, exact: true },
     { path: "/users/order-success", component: <OrderCreatePage />, exact: true },
+    { path:"/search", component: <SearchPage />, exact: true },
     
     { path: "*", component: <Navigate to="/" replace />, exact: true },
 ];

@@ -10,7 +10,7 @@ export const getOneProduct = async (id) => {
     return response.data;
 }
 
-export const searchProducts = async (query) => {
-    const response = await axios.get(`http://localhost:3000/products?search=${query}`);
+export const searchProducts = async (queryString = '') => {
+    const response = await axios.get(`http://localhost:3000/products${queryString}`);
     return response.data;
 };

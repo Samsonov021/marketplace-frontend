@@ -52,3 +52,8 @@
     background-color: #218838;
   }
   
+  .noProductsMessage {
+    font-size: 18px;
+    color: #555;
+    margin-top: 20px;
+}

@@ -1,36 +1,36 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import ProductList from "../../components/product-list/ProductList";
 import cl from './MainPage.module.css';
-import { getAllProducts, searchProducts } from "../../api/product.api";
+import { getAllProducts } from "../../api/product.api";
 
 const MainPage = () => {
-  const searchQuery = useSelector((state) => state.auth.searchQuery);
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
-      if (searchQuery) {
-        const response = await searchProducts(searchQuery);
-        setProducts(response);
-      } else {
+      setLoading(true);
+      try {
         const response = await getAllProducts();
         setProducts(response);
+      } catch (error) {
+        console.error("Ошибка загрузки продуктов:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchProducts();
-  }, [searchQuery]);
+  }, []);
 
   return (
     <div className={cl.main}>
-      {searchQuery && (
-        <h2 className={cl.searchResultsTitle}>Результаты поиска по "{searchQuery}":</h2>
-      )}
-      {products.length > 0 ? (
+      {loading ? (
+        <p>Загрузка продуктов...</p>
+      ) : products.length > 0 ? (
         <ProductList products={products} />
       ) : (
-        <p className={cl.noProductsMessage}>Подходящих товаров не найдено</p>
+        <p className={cl.noProductsMessage}>Товары не найдены.</p>
       )}
     </div>
   );

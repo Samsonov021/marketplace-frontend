@@ -6,8 +6,8 @@ import UiModal from "../modal/UiModal";
 import AuthForm from "../../auth-form/AuthForm";
 import { authTypes } from "../../../config/auth.config";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, setSearchQuery } from "../../../store/authActions";
-import { Link } from "react-router-dom";
+import { logout } from "../../../store/authActions";
+import { Link, useNavigate } from "react-router-dom";
 import searchIcon from '../../../image/search-icon.png';
 
 const Navbar = () => {
@@ -16,14 +16,22 @@ const Navbar = () => {
     const [localSearchQuery, setLocalSearchQuery] = useState("");
     const { isAuthenticated, user } = useSelector(state => state.auth);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleSearch = () => {
-        dispatch(setSearchQuery(localSearchQuery));
+        if (localSearchQuery.trim()) {
+            navigate(`/search?query=${encodeURIComponent(localSearchQuery.trim())}`);
+        }
     };
 
     const clearSearch = () => {
-        dispatch(setSearchQuery(''));
-        setLocalSearchQuery(''); 
+        setLocalSearchQuery('');
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
     };
 
     return (
@@ -46,6 +54,7 @@ const Navbar = () => {
                     placeholder='Поиск'
                     value={localSearchQuery}
                     onChange={(e) => setLocalSearchQuery(e.target.value)}
+                    onKeyDown={handleKeyDown}
                 />
                 <img
                     src={searchIcon}
